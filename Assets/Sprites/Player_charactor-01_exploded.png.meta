@@ -1,0 +1,391 @@
+fileFormatVersion: 2
+guid: 50a783a7fc84f4c2cac6f49e244f6b0e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5342136970565040267
+    second: Player_charactor-01_exploded_0
+  - first:
+      213: -4948411759764049333
+    second: Player_charactor-01_exploded_1
+  - first:
+      213: -1077844603706046806
+    second: Player_charactor-01_exploded_2
+  - first:
+      213: 7014851163667380944
+    second: Player_charactor-01_exploded_3
+  - first:
+      213: 5158099496376538421
+    second: Player_charactor-01_exploded_4
+  - first:
+      213: -6550202351988108144
+    second: Player_charactor-01_exploded_5
+  - first:
+      213: -1722397411116323955
+    second: Player_charactor-01_exploded_6
+  - first:
+      213: 8949021226986936497
+    second: Player_charactor-01_exploded_7
+  - first:
+      213: -9126645062571755920
+    second: Player_charactor-01_exploded_8
+  - first:
+      213: -1882082366995887987
+    second: Player_charactor-01_exploded_9
+  - first:
+      213: -449589639309340320
+    second: Player_charactor-01_exploded_10
+  - first:
+      213: 3562337873172181238
+    second: Player_charactor-01_exploded_11
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 320
+        width: 56
+        height: 138
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b8d7e75de29b4035b9acdd7b135d311
+      internalID: 5342136970565040267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_1
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 337
+        width: 59.7993
+        height: 137
+      alignment: 9
+      pivot: {x: 0.51840067, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f27f0483577a14d9b80bf98afa566b5b
+      internalID: -4948411759764049333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_2
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 371
+        width: 154
+        height: 137
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c76816aa714a04f099a31be011946967
+      internalID: -1077844603706046806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_3
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 364
+        width: 165
+        height: 144
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f7e8508444034c3eba4adc01bc7eb1d
+      internalID: 7014851163667380944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 175
+        width: 87
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff13e6d9add6f467db62fc383ad194cd
+      internalID: 5158099496376538421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_5
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 174
+        width: 105
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8780318898b9c4f76a62426aa3b485b4
+      internalID: -6550202351988108144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_6
+      rect:
+        serializedVersion: 2
+        x: 213.20073
+        y: 174.89961
+        width: 142.39781
+        height: 184.10036
+      alignment: 9
+      pivot: {x: 0.5077274, y: 0.50298864}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 597dcad2d77a44e81a235c82840abb91
+      internalID: -1722397411116323955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_7
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 215
+        width: 150
+        height: 151
+      alignment: 9
+      pivot: {x: 0.50333333, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfeb9a245ad07407db455f0cb4c41612
+      internalID: 8949021226986936497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 8
+        width: 102
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3f0199d0ce44054b092a5d073ec1b3
+      internalID: -9126645062571755920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_9
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 9
+        width: 100
+        height: 161
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0f3c6b776be4715ba7ca92c3822da0
+      internalID: -1882082366995887987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_10
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 21
+        width: 61
+        height: 151
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da71e5d51d1d74354ba85155f00a823e
+      internalID: -449589639309340320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_charactor-01_exploded_11
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 35
+        width: 54
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34dd070e145904d6db35a32c3497da57
+      internalID: 3562337873172181238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 637095995340000000
+  assetBundleName: 
+  assetBundleVariant: 

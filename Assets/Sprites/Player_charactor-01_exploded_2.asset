@@ -1,23 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c10c0be6d28fe4d539c4a39822fe301c, type: 3}
-  m_Name: Player_charactor-01_exploded_2
-  m_EditorClassIdentifier: 
-  m_ApiVersion: 4
-  m_Sprite: {fileID: -1077844603706046806, guid: 50a783a7fc84f4c2cac6f49e244f6b0e,
-    type: 3}
-  m_SharedMesh: {fileID: 4951482674311916011}
-  m_SharedMaterials: []
---- !u!114 &4892182119510222365
+--- !u!114 &-9019165973583512532
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,36 +97,36 @@ MonoBehaviour:
     boneIndex2: 0
     boneIndex3: 0
   m_Edges:
-  - index1: 8
-    index2: 7
-  - index1: 4
-    index2: 7
-  - index1: 8
-    index2: 6
-  - index1: 0
-    index2: 4
   - index1: 5
     index2: 6
+  - index1: 8
+    index2: 6
+  - index1: 8
+    index2: 7
+  - index1: 7
+    index2: 4
   - index1: 3
     index2: 5
   - index1: 2
-    index2: 0
+    index2: 1
   - index1: 1
     index2: 3
-  - index1: 2
-    index2: 1
+  - index1: 0
+    index2: 2
+  - index1: 0
+    index2: 4
   m_Holes: []
   m_Indices: 080000000500000006000000080000000700000004000000030000000500000008000000020000000100000003000000000000000200000004000000030000000400000002000000080000000400000003000000
   m_BindPoses:
   - bindPose:
-      e00: 0.033414464
-      e01: 0.9365813
+      e00: 0.24999341
+      e01: 0.9917749
       e02: 0
-      e03: 0.42882368
-      e10: -0.9993642
-      e11: 0.035654265
+      e03: 0.52898157
+      e10: -0.9845003
+      e11: 0.11229331
       e12: 0
-      e13: 0.0038674402
+      e13: 0.033572797
       e20: 0
       e21: 0
       e22: 1
@@ -158,7 +141,7 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0, a: 1}
     zOrder: 0
   m_Blendshapes: []
---- !u!43 &4951482674311916011
+--- !u!43 &-3470714082021760517
 Mesh:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,14 +166,14 @@ Mesh:
     channels: []
     fullWeights: []
   m_BindPose:
-  - e00: 0.033414464
-    e01: 0.9365813
+  - e00: 0.24999341
+    e01: 0.9917749
     e02: 0
-    e03: 0.42882368
-    e10: -0.9993642
-    e11: 0.035654265
+    e03: 0.52898157
+    e10: -0.9845003
+    e11: 0.11229331
     e12: 0
-    e13: 0.0038674402
+    e13: 0.033572797
     e20: 0
     e21: 0
     e22: 1
@@ -202,8 +185,8 @@ Mesh:
   m_BoneNameHashes: 
   m_RootBoneNameHash: 0
   m_BonesAABB:
-  - m_Min: {x: -0.17125174, y: -0.72975826, z: 0}
-    m_Max: {x: 1.019543, y: 0.7460502, z: 0}
+  - m_Min: {x: -0.14079446, y: -0.7196233, z: 0}
+    m_Max: {x: 1.2643298, y: 0.8137193, z: 0}
   m_VariableBoneCountWeights:
     m_Data: 
   m_MeshCompression: 0
@@ -339,3 +322,20 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10c0be6d28fe4d539c4a39822fe301c, type: 3}
+  m_Name: Player_charactor-01_exploded_2
+  m_EditorClassIdentifier: 
+  m_ApiVersion: 4
+  m_Sprite: {fileID: -1077844603706046806, guid: 50a783a7fc84f4c2cac6f49e244f6b0e,
+    type: 3}
+  m_SharedMesh: {fileID: -3470714082021760517}
+  m_SharedMaterials: []

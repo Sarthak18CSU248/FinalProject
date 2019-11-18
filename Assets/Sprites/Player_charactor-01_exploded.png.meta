@@ -125,7 +125,7 @@ TextureImporter:
       name: Player_charactor-01_exploded_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 26.000002
         y: 320
         width: 56
         height: 138
@@ -293,12 +293,12 @@ TextureImporter:
       name: Player_charactor-01_exploded_8
       rect:
         serializedVersion: 2
-        x: 14
+        x: 14.000004
         y: 8
         width: 102
         height: 164
       alignment: 9
-      pivot: {x: 0.5, y: 0.49999997}
+      pivot: {x: 0.49999997, y: 0.49999994}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,6 +386,6 @@ TextureImporter:
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
-  userData: 637095995340000000
+  userData: 637096535530000000
   assetBundleName: 
   assetBundleVariant: 

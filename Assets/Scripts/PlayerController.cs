@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _OriginalSize;
     private Vector3 _frontCorner;
     private Vector3 _backCorner;
+    private Animator _animator;
 
 
     // Start is called before the first frame update
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
         _OriginalSize = _boxCollider.size;
         _currentGlidetimer = Glidetimer;
+        _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -185,8 +187,8 @@ public class PlayerController : MonoBehaviour
                  transform.position = new Vector3(transform.position.x, transform.position.y - (_OriginalSize.y / 4), 0);
                 _characterController.recalculateDistanceBetweenRays();
             }
-            isDucking = true;
-            isCreeping = false;
+            isDucking = false;
+            isCreeping = true;
         }
         else if (Input.GetAxis("Vertical") < 0 && _moveDirection.x == 0f)
         {
@@ -197,8 +199,8 @@ public class PlayerController : MonoBehaviour
                  transform.position = new Vector3(transform.position.x, transform.position.y - (_OriginalSize.y / 4), 0);
                 _characterController.recalculateDistanceBetweenRays();
             }
-            isDucking = false;
-            isCreeping = true;
+            isDucking = true;
+            isCreeping = false;
         }
         else 
         {
@@ -259,6 +261,7 @@ public class PlayerController : MonoBehaviour
                 isWallRunning = true;
             }
         }
+        updateanimator();
     }
     IEnumerator wallJumpwaiter()
     {
@@ -272,5 +275,17 @@ public class PlayerController : MonoBehaviour
         isWallRunning = true;
         yield return new WaitForSeconds(0.5f);
         isWallRunning = false;
+    }
+    private void updateanimator()
+    {
+        _animator.SetFloat("MovementX", Mathf.Abs(_moveDirection.x));
+        _animator.SetFloat("MovementY", _moveDirection.y);
+        _animator.SetBool("isGrounded", isGrounded);
+        _animator.SetBool("isJumping", isJumping);
+        _animator.SetBool("isWallJumped", WallJumped);
+        _animator.SetBool("isWallRunning",isWallRunning);
+        _animator.SetBool("isGliding", isGliding);
+        _animator.SetBool("isDucking", isDucking);
+        _animator.SetBool("isCreeping", isCreeping);
     }
 }

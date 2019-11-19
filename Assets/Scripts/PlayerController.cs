@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _frontCorner;
     private Vector3 _backCorner;
     private Animator _animator;
+    private bool _abletoWallRun;
 
 
     // Start is called before the first frame update
@@ -114,6 +115,7 @@ public class PlayerController : MonoBehaviour
 
                 _moveDirection.y = jumpSpeed;
                 isJumping = true;
+                _abletoWallRun = true;
             }
         }
         else
@@ -222,11 +224,21 @@ public class PlayerController : MonoBehaviour
         {
             if (canWallRun)
             {
-                if (Input.GetAxis("Vertical") > 0 && isWallRunning ==true )
+                if (Input.GetAxis("Vertical") > 0 && _abletoWallRun ==true )
                 {
                     _moveDirection.y = jumpSpeed / wallRunAmount;
+                    StartCoroutine(wallrunwaiter());
                 }
-                StartCoroutine(wallrunwaiter());
+                
+                if (flags.left)
+                {
+                    transform.eulerAngles = new Vector3(0, 180, 0);
+                }
+
+                else
+                {
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                }
             }
             if (CanWallJump)
             {
@@ -258,7 +270,8 @@ public class PlayerController : MonoBehaviour
             if (canrunafterwalljump)
             {
                 StopCoroutine(wallrunwaiter());
-                isWallRunning = true;
+                _abletoWallRun = true;
+                isWallRunning = false;
             }
         }
         updateanimator();
@@ -275,6 +288,10 @@ public class PlayerController : MonoBehaviour
         isWallRunning = true;
         yield return new WaitForSeconds(0.5f);
         isWallRunning = false;
+        if (WallJumped == false)
+        {
+            _abletoWallRun = false;
+        }
     }
     private void updateanimator()
     {
@@ -287,5 +304,6 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("isGliding", isGliding);
         _animator.SetBool("isDucking", isDucking);
         _animator.SetBool("isCreeping", isCreeping);
+        _animator.SetBool("isSlopeSliding", isSlopeSliding);
     }
 }

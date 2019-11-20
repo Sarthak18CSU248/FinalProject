@@ -5,7 +5,17 @@ using Prime31;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum GroundType
+    {
+        none,
+        LevelGeometry,
+        OneWayPlatform,
+        MovingPlatform,
+        CollapsingPlatform
+    }
+
     public CharacterController2D.CharacterCollisionState2D flags;
+    public CollapsingPlatform collapse;
     public float walkSpeed = 6.0f;
     public float jumpSpeed =9.0f;
     public float gravity = 20.0f;
@@ -16,7 +26,6 @@ public class PlayerController : MonoBehaviour
     public float GlideAmount = 2f;
     public float Glidetimer = 2.5f;
     public float creepSpeed = 3.0f;
-    public float compare = 0.0f;
 
 
     public bool isGrounded;
@@ -52,6 +61,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 _backCorner;
     private Animator _animator;
     private bool _abletoWallRun;
+    public GroundType _groundType;
+    private GameObject _tempOneWayPlatform;
+    private GameObject _tempMovingPlatform;
 
 
     // Start is called before the first frame update
@@ -71,23 +83,21 @@ public class PlayerController : MonoBehaviour
         if (WallJumped == false)
         {
             _moveDirection.x = Input.GetAxis("Horizontal");
-            _moveDirection.x *= walkSpeed;
-        }
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 2f, layerMask);
-        
-        if (hit)
-        {
-            _slopeAngles = Vector2.Angle(hit.normal, Vector2.up);
-            _slopeGrad = hit.normal;
-            if (_slopeAngles > _characterController.slopeLimit)
+            if (isCreeping)
             {
-                isSlopeSliding = true;
+                _moveDirection.x *= creepSpeed;
             }
             else
             {
-                isSlopeSliding = false;
+
+
+                _moveDirection.x *= walkSpeed;
             }
         }
+
+        GetGroundType();
+
+       
         if (isGrounded)
         {
             _currentGlidetimer = Glidetimer;
@@ -112,7 +122,10 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetButtonDown("Jump"))
             {
-
+                if(isDucking && _groundType.Equals(GroundType.OneWayPlatform))
+                {
+                    StartCoroutine(DisableOneWayPlatform());
+                }
                 _moveDirection.y = jumpSpeed;
                 isJumping = true;
                 _abletoWallRun = true;
@@ -175,7 +188,7 @@ public class PlayerController : MonoBehaviour
         _characterController.move(_moveDirection * Time.deltaTime);
         flags = _characterController.collisionState;
 
-        isGrounded = flags.below;
+       
 
         _frontCorner = new Vector3(transform.position.x + _boxCollider.size.x / 2, transform.position.y + _boxCollider.size.y / 2, 0);
         _backCorner = new Vector3(transform.position.x - _boxCollider.size.x / 2, transform.position.y + _boxCollider.size.y / 2, 0);
@@ -224,7 +237,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canWallRun)
             {
-                if (Input.GetAxis("Vertical") > 0 && _abletoWallRun ==true )
+                if (Input.GetAxis("Vertical") > 0 && _abletoWallRun ==true && isGrounded==false)
                 {
                     _moveDirection.y = jumpSpeed / wallRunAmount;
                     StartCoroutine(wallrunwaiter());
@@ -262,6 +275,11 @@ public class PlayerController : MonoBehaviour
 
                     }
                     StartCoroutine(wallJumpwaiter());
+
+                    if (canrunafterwalljump==false)
+                    {
+                        _abletoWallRun = false;
+                    }
                 }
             }
         }
@@ -273,7 +291,9 @@ public class PlayerController : MonoBehaviour
                 _abletoWallRun = true;
                 isWallRunning = false;
             }
+
         }
+        isGrounded = flags.below;
         updateanimator();
     }
     IEnumerator wallJumpwaiter()
@@ -291,6 +311,80 @@ public class PlayerController : MonoBehaviour
         if (WallJumped == false)
         {
             _abletoWallRun = false;
+        }
+    }
+    IEnumerator DisableOneWayPlatform()
+    {
+        if(_tempOneWayPlatform)
+        {
+            _tempOneWayPlatform.GetComponent<EdgeCollider2D>().enabled = false;
+            yield return new WaitForSeconds(1f);
+            
+        }
+        if (_tempOneWayPlatform)
+        {
+            _tempOneWayPlatform.GetComponent<EdgeCollider2D>().enabled = true;
+            _tempOneWayPlatform = null;
+
+        }
+    }
+    private void GetGroundType()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 2f, layerMask);
+
+        if (hit)
+        {
+            _slopeAngles = Vector2.Angle(hit.normal, Vector2.up);
+            _slopeGrad = hit.normal;
+            if (_slopeAngles > _characterController.slopeLimit)
+            {
+                isSlopeSliding = true;
+            }
+            else
+            {
+                isSlopeSliding = false;
+            }
+            string layerName = LayerMask.LayerToName(hit.transform.gameObject.layer);
+            if (layerName == "OneWayPlatform")
+            {
+                _groundType = GroundType.OneWayPlatform;
+                if (!_tempOneWayPlatform)
+                {
+                    _tempOneWayPlatform = hit.transform.gameObject;
+                }
+            }
+            else if (layerName == "MovingPlatform")
+            {
+                _groundType = GroundType.MovingPlatform;
+                if (!_tempMovingPlatform)
+                {
+                    Debug.Log("Hi");
+                    _tempMovingPlatform = hit.transform.gameObject;
+                    transform.SetParent(hit.transform);
+                }
+            }
+            else if (layerName == "LevelGeometry")
+            {
+                _groundType = GroundType.LevelGeometry;
+            }
+            else if (layerName == "CollapsingPlatform")
+            {
+                _groundType = GroundType.CollapsingPlatform;
+                hit.transform.gameObject.GetComponent<CollapsingPlatform>().CollapsePlatform();
+            }
+            
+        }
+        else
+        {
+            _groundType = GroundType.none;
+        }
+        if (!_groundType.Equals(GroundType.MovingPlatform))
+        {
+            if(_tempMovingPlatform)
+            {
+                transform.SetParent(null);
+                _tempMovingPlatform = null;
+            }
         }
     }
     private void updateanimator()

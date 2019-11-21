@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Prime31;
+using Global;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
         MovingPlatform,
         CollapsingPlatform
     }
+   
 
     public CharacterController2D.CharacterCollisionState2D flags;
     public CollapsingPlatform collapse;
@@ -59,11 +61,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 _OriginalSize;
     private Vector3 _frontCorner;
     private Vector3 _backCorner;
+    private Vector3 _frontBottomCorner;
+    private Vector3 _backBottomCorner;
     private Animator _animator;
     private bool _abletoWallRun;
     public GroundType _groundType;
     private GameObject _tempOneWayPlatform;
     private GameObject _tempMovingPlatform;
+    private EffectorType _currentEffectorType = EffectorType.None;
+    private Vector3 _currenteffectorAdjustment = Vector3.zero;
 
 
     // Start is called before the first frame update
@@ -152,6 +158,10 @@ public class PlayerController : MonoBehaviour
                             _moveDirection.y = DoubleJumpSpeed;
                             doubleJumped = true;
                         }
+                        if (!isGrounded && _groundType.Equals(GroundType.MovingPlatform))
+                        {
+                            doubleJumped = false;
+                        }
                     }
                 }
             }
@@ -183,6 +193,11 @@ public class PlayerController : MonoBehaviour
             isGliding = false;
             _startGlide = true;
             _moveDirection.y -= gravity * Time.deltaTime;
+        }
+
+        if(!_currentEffectorType.Equals(EffectorType.None))
+        {
+            EffectorAdjustment();
         }
 
         _characterController.move(_moveDirection * Time.deltaTime);
@@ -293,16 +308,25 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
         isGrounded = flags.below;
+        if(isGrounded)
+        {
+            GetGroundType();
+        }
+        else if(!isGrounded && !flags.wasGroundedLastFrame)
+        {
+            ClearGroundType();
+        }
         updateanimator();
     }
+
     IEnumerator wallJumpwaiter()
     {
         WallJumped = true;
         yield return new WaitForSeconds(0.5f);
         WallJumped = false;
     }
-
     IEnumerator wallrunwaiter()
     {
         isWallRunning = true;
@@ -328,9 +352,46 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("Triggered");
+        Effectors effector = collider.gameObject.GetComponent<Effectors>();
+        if(effector)
+        {
+            _currentEffectorType = effector.effectortype;
+            _currenteffectorAdjustment = effector.effectorAdjustment;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+
+    }
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+
+    }
+
     private void GetGroundType()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 2f, layerMask);
+        if (!hit)
+        {
+            _frontBottomCorner = new Vector3(transform.position.x + _boxCollider.size.x / 2, transform.position.y, 0);
+
+            _backBottomCorner = new Vector3(transform.position.x - _boxCollider.size.x / 2, transform.position.y, 0);
+            RaycastHit2D hitFrontFloor = Physics2D.Raycast(_frontBottomCorner, -Vector2.up, 2f, layerMask);
+            RaycastHit2D hitBackFloor = Physics2D.Raycast(_backBottomCorner, -Vector2.up, 2f, layerMask);
+
+            if (!hitFrontFloor.collider && hitBackFloor.collider)
+            {
+                hit = hitBackFloor;
+            }
+            else if (hitFrontFloor.collider && !hitBackFloor.collider)
+            {
+                hit = hitFrontFloor;
+            }
+        }
 
         if (hit)
         {
@@ -374,16 +435,38 @@ public class PlayerController : MonoBehaviour
             }
             
         }
-        else
+        
+    }
+
+    private void ClearGroundType()
+    {
+        _groundType = GroundType.none;
+        if(_tempMovingPlatform)
         {
-            _groundType = GroundType.none;
+            _tempMovingPlatform = null;
         }
-        if (!_groundType.Equals(GroundType.MovingPlatform))
+        transform.SetParent(null);
+    }
+    private void EffectorAdjustment()
+    {
+        if (_currentEffectorType.Equals(EffectorType.TractorBeam))
         {
-            if(_tempMovingPlatform)
+            _moveDirection.y = _currenteffectorAdjustment.y;
+        }
+        else if (_currentEffectorType.Equals(EffectorType.FloatZone))
+        {
+            _moveDirection += _currenteffectorAdjustment;
+        }
+        else if (_currentEffectorType.Equals(EffectorType.Ladder))
+        {
+            _moveDirection.y = 0;
+            if(Input.GetAxis("Vertical")>0)
             {
-                transform.SetParent(null);
-                _tempMovingPlatform = null;
+                _moveDirection.y = _currenteffectorAdjustment.y;
+            }
+            else if (Input.GetAxis("Vertical") < 0 )
+            {
+                _moveDirection.y = -_currenteffectorAdjustment.y;
             }
         }
     }

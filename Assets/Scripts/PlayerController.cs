@@ -6,6 +6,7 @@ using Global;
 
 public class PlayerController : MonoBehaviour
 {
+
     public enum GroundType
     {
         none,
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _currenteffectorAdjustment = Vector3.zero;
 
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (WallJumped == false)
@@ -352,6 +353,7 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -432,6 +434,8 @@ public class PlayerController : MonoBehaviour
             {
                 _groundType = GroundType.CollapsingPlatform;
                 hit.transform.gameObject.GetComponent<CollapsingPlatform>().CollapsePlatform();
+                
+                
             }
             
         }

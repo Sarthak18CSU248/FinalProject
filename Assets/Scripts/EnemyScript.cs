@@ -22,7 +22,7 @@ public class EnemyScript : MonoBehaviour
     public float moveSpeed=3f;
     public float jumpSpeed = 10f;
     public float gravity = 20f;
-    private bool isFacingLeft;
+    private bool isFacingLeft = false;
     public bool aTurn = true;
     public bool jumpforward = true;
     public bool jumpandWait = true;
@@ -70,17 +70,7 @@ public class EnemyScript : MonoBehaviour
             }
             else if (groundstate.Equals(GroundState.Jump))
             {
-                if (aTurn)
-                {
-                    if (flags.left && isFacingLeft)
-                    {
-                        Turn();
-                    }
-                    else if (flags.right && !isFacingLeft)
-                    {
-                        Turn();
-                    }
-                }
+                
                 _moveDirection.y = jumpSpeed;
                 if(jumpforward && isFacingLeft)
                 {
@@ -125,7 +115,9 @@ public class EnemyScript : MonoBehaviour
     IEnumerator JumpAndWait()
     {
         groundstate = GroundState.Stop;
-        yield return new WaitForSeconds(2f);
+        groundstate = GroundState.MoveForward;
+        yield return new WaitForSeconds(1.5f);
         groundstate = GroundState.Jump;
+
     }
 }

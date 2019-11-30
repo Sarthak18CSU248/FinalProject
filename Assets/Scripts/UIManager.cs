@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-
-    public GameObject player, ground_enemy, platforms, playerinfo, startmenu;
+    
+    
+    public GameObject player, ground_enemy, platforms, playerinfo, startmenu,ground_enemy2,ground_enemy3,airenemy;
     public void restart()
     {
         SceneManager.LoadScene("SampleScene");
@@ -18,17 +19,13 @@ public class UIManager : MonoBehaviour
         ground_enemy.SetActive(true);
         platforms.SetActive(true);
         playerinfo.SetActive(true);
+        ground_enemy.SetActive(true);
+        ground_enemy2.SetActive(true);
+        ground_enemy3.SetActive(true);
 
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

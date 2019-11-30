@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Countdown : MonoBehaviour
 {
     public Text uitext;
-    private float maintimer;
+    public float maintimer;
     private float timer;
     private bool canCount = true;
     private bool doOnce = false;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class airEnemy : MonoBehaviour
 {
+    public GameObject Player,Game_Over;
+    
+    public bool istriggered=false;
     public enum airenemystate
     {
         Stop ,
@@ -21,6 +24,12 @@ public class airEnemy : MonoBehaviour
         Explode,
         Disappear
     }
+    public void GameOver()
+    {
+        Game_Over.SetActive(true);
+        
+
+    }
     public airenemystate AirenemyState;
     public collisionBehaviour Collission_Behaviour;
 
@@ -30,7 +39,6 @@ public class airEnemy : MonoBehaviour
     public float rotationSpeed = 10f;
     public bool autoTargetPlayer = true;
     public Transform target;
-
     private bool _tracking = true;
     public LayerMask lm;
     public float dashAmount;
@@ -53,11 +61,7 @@ public class airEnemy : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity = 0f;
         }
-        if (AirenemyState.Equals(airenemystate.Animated))
-        {
-
-        }
-
+       
         if (AirenemyState.Equals(airenemystate.Dash))
         {
             if(_tracking)
@@ -95,7 +99,14 @@ public class airEnemy : MonoBehaviour
         {
             rb.MovePosition(transform.position + (movedirection * thrust) * Time.deltaTime);
         }
+        if (Vector3.Distance(Player.transform.position, rb.transform.position) <= 0.1f)
+        {
+            istriggered = true;
+            GameOver();
+            
+        }
     }
+   
     public void MoveTowards(Transform target)
     {
         Lookat2D(target);
@@ -108,10 +119,7 @@ public class airEnemy : MonoBehaviour
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
+   
     IEnumerator Dash()
     {
         _tracking = false;
@@ -122,4 +130,5 @@ public class airEnemy : MonoBehaviour
         rb.angularVelocity = 0f;
         _tracking = true;
     }
+   
 }

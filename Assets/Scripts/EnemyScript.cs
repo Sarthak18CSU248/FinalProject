@@ -13,8 +13,15 @@ public class EnemyScript : MonoBehaviour
         Patrol,
         Dash
     }
+    public void GameOver()
+    {
+        Game_Over.SetActive(true);
 
+
+    }
     public GroundState groundstate;
+
+    public GameObject Player, rb,Game_Over;
     public bool isGrounded;
     private Vector3 _moveDirection = Vector3.zero;
     private CharacterController2D _characterController;
@@ -25,6 +32,7 @@ public class EnemyScript : MonoBehaviour
     private bool isFacingLeft = false;
     public bool aTurn = true;
     public bool jumpforward = true;
+    public bool istriggered = true;
     public bool jumpandWait = true;
 
     // Start is called before the first frame update
@@ -63,6 +71,13 @@ public class EnemyScript : MonoBehaviour
                 {
                     _moveDirection.x = moveSpeed;
                 }
+                if (Vector3.Distance(Player.transform.position, rb.transform.position) <= 0.1f)
+                {
+                    istriggered = true;
+                    GameOver();
+
+
+                }
             }
             else if (groundstate.Equals(GroundState.Dash))
             {
@@ -84,12 +99,16 @@ public class EnemyScript : MonoBehaviour
                 {
                     StartCoroutine(JumpAndWait());
                 }
+                if (Vector3.Distance(Player.transform.position, rb.transform.position) <= 0.1f)
+                {
+                    istriggered = true;
+                    GameOver();
+
+
+
+                }
             }
 
-            else if  (groundstate.Equals(GroundState.Patrol))
-            {
-
-            }
         }
         _moveDirection.y -= gravity * Time.deltaTime;
         _characterController.move(_moveDirection * Time.deltaTime);

@@ -6,7 +6,7 @@ using Global;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public GameObject enemy,siren1;
     public enum GroundType
     {
         none,
@@ -72,8 +72,6 @@ public class PlayerController : MonoBehaviour
     private EffectorType _currentEffectorType = EffectorType.None;
     private Vector3 _currenteffectorAdjustment = Vector3.zero;
 
-
-    
     void Start()
     {
         
@@ -84,9 +82,10 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    
+
     void Update()
     {
+        
         if (WallJumped == false)
         {
             _moveDirection.x = Input.GetAxis("Horizontal");
@@ -486,5 +485,14 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("isDucking", isDucking);
         _animator.SetBool("isCreeping", isCreeping);
         _animator.SetBool("isSlopeSliding", isSlopeSliding);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "AirEnemy")
+        {
+            Debug.Log("Triggered");
+            enemy.SetActive(true);
+            siren1.SetActive(false);
+        }
     }
 }

@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{E1456745-ED92-4EB6-8905-E64DC1E47277}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/airEnemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyScript.cs">
     <Files>
+      <File FileName="Assets/Scripts/UIManager.cs" Line="27" Column="5" IsPinned="True" />
       <File FileName="Assets/Scripts/CharacterController2D.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="86" Column="1" />
       <File FileName="Assets/Scripts/CameraController.cs" />
-      <File FileName="Assets/Scripts/Countdown.cs" Line="8" Column="11" />
+      <File FileName="Assets/Scripts/Countdown.cs" />
       <File FileName="Assets/Scripts/CollapsingPlatform.cs" />
       <File FileName="Assets/Scripts/Effectors.cs" />
       <File FileName="Assets/Scripts/Global.cs" />
-      <File FileName="Assets/EnemyScript.cs" Line="117" Column="46" />
-      <File FileName="../../../../../Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/GraphicRaycaster.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Ui.cs" Line="15" Column="53" />
-      <File FileName="Assets/Scripts/UIManager.cs" Line="21" Column="1" />
-      <File FileName="Assets/airEnemy.cs" Line="7" Column="19" />
+      <File FileName="../../../../../Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/GraphicRaycaster.cs" />
+      <File FileName="Assets/airEnemy.cs" Line="105" Column="24" />
+      <File FileName="Assets/Scripts/checkpoint_con.cs" Line="22" Column="39" />
+      <File FileName="Assets/Scripts/EnemyScript.cs" Line="105" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -24,7 +24,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9f138074-c372-44ad-bcd8-ad75ea4b9f42" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5582f887-eb30-4c4d-a452-e69326cdb000" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

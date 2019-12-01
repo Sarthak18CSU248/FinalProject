@@ -22,6 +22,7 @@ public class EnemyScript : MonoBehaviour
     public GroundState groundstate;
 
     public GameObject Player, rb,Game_Over;
+    
     public bool isGrounded;
     private Vector3 _moveDirection = Vector3.zero;
     private CharacterController2D _characterController;
@@ -34,11 +35,13 @@ public class EnemyScript : MonoBehaviour
     public bool jumpforward = true;
     public bool istriggered = true;
     public bool jumpandWait = true;
+   
 
     // Start is called before the first frame update
     void Start()
     {
         _characterController = gameObject.GetComponent<CharacterController2D>();
+        
     }
 
     // Update is called once per frame
@@ -46,7 +49,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (isGrounded)
         {
-            if(groundstate.Equals(GroundState.Stop))
+            if (groundstate.Equals(GroundState.Stop))
             {
                 _moveDirection = Vector3.zero;
             }
@@ -71,6 +74,7 @@ public class EnemyScript : MonoBehaviour
                 {
                     _moveDirection.x = moveSpeed;
                 }
+                
                 if (Vector3.Distance(Player.transform.position, rb.transform.position) <= 0.1f)
                 {
                     istriggered = true;

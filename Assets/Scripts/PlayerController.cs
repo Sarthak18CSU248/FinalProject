@@ -6,7 +6,7 @@ using Global;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject enemy,siren1;
+    public GameObject player,checkpoint1,checkpoint2,greenflag1,greenflag2,speedcoin,speedcoin1,speedcoin2,speedcoin3;
     public enum GroundType
     {
         none,
@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
         MovingPlatform,
         CollapsingPlatform
     }
-   
+    public airEnemy air_enemy;
+    
 
     public CharacterController2D.CharacterCollisionState2D flags;
     public CollapsingPlatform collapse;
@@ -71,6 +72,14 @@ public class PlayerController : MonoBehaviour
     private GameObject _tempMovingPlatform;
     private EffectorType _currentEffectorType = EffectorType.None;
     private Vector3 _currenteffectorAdjustment = Vector3.zero;
+    public Vector3 checkpoint_coardinates1 = Vector3.zero;
+    public Vector3 checkpoint_coardinates2 = Vector3.zero;
+    public Vector3 speedcoin_coardinates1 = Vector3.zero;
+    public Vector3 speedcoin_coardinates2 = Vector3.zero;
+    public Vector3 speedcoin_coardinates3 = Vector3.zero;
+    public Vector3 speedcoin_coardinates4 = Vector3.zero;
+
+    public bool check1, check2; 
 
     void Start()
     {
@@ -80,6 +89,12 @@ public class PlayerController : MonoBehaviour
         _OriginalSize = _boxCollider.size;
         _currentGlidetimer = Glidetimer;
         _animator = GetComponentInChildren<Animator>();
+        checkpoint_coardinates1 = checkpoint1.transform.position;
+        checkpoint_coardinates2 = checkpoint2.transform.position;
+        speedcoin_coardinates1 = speedcoin.transform.position;
+        speedcoin_coardinates2 = speedcoin1.transform.position;
+        speedcoin_coardinates3 = speedcoin2.transform.position;
+        speedcoin_coardinates4 = speedcoin3.transform.position;
     }
 
 
@@ -106,6 +121,56 @@ public class PlayerController : MonoBehaviour
        
         if (isGrounded)
         {
+            float EPSILON = 0.5f;
+            if (System.Math.Abs(player.transform.position.x - checkpoint_coardinates1.x) <= EPSILON)
+            {
+                checkpoint1.SetActive(false);
+                greenflag1.SetActive(true);
+                check1 = true;
+            }
+            if (System.Math.Abs(player.transform.position.x - checkpoint_coardinates2.x) <= EPSILON)
+            {
+                checkpoint2.SetActive(false);
+                greenflag2.SetActive(true);
+                check2 = true;
+            }
+            if (air_enemy.istriggered == true )
+            {
+                if (check1 == true && check2 == false)
+                {
+                   _moveDirection.x = checkpoint_coardinates1.x;
+                   _moveDirection.y = checkpoint_coardinates1.y;
+                   _moveDirection.z = 0;
+
+
+                }
+            }
+            float a = 0.5f;
+            if (System.Math.Abs(player.transform.position.x - speedcoin_coardinates1.x) <= a)
+            {
+                speedcoin.SetActive(false);
+                StartCoroutine(Walking());
+                
+            }
+            if (System.Math.Abs(player.transform.position.x - speedcoin_coardinates2.x) <= a)
+            {
+                speedcoin1.SetActive(false);
+                StartCoroutine(Walking());
+
+            }
+            if (System.Math.Abs(player.transform.position.x - speedcoin_coardinates3.x) <= a)
+            {
+                speedcoin2.SetActive(false);
+                StartCoroutine(Walking());
+
+            }
+            if (System.Math.Abs(player.transform.position.x - speedcoin_coardinates4.x) <= a)
+            {
+                speedcoin3.SetActive(false);
+                StartCoroutine(Walking());
+
+            }
+
             _currentGlidetimer = Glidetimer;
             _moveDirection.y = 0;
             isJumping = false;
@@ -352,6 +417,12 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    IEnumerator Walking()
+    {
+        walkSpeed = (walkSpeed * 1.5f);
+        yield return new WaitForSeconds(4f);
+        walkSpeed = 6.0f; 
+    }
     
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -364,15 +435,7 @@ public class PlayerController : MonoBehaviour
             _currenteffectorAdjustment = effector.effectorAdjustment;
         }
     }
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-
-    }
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-
-    }
-
+    
     private void GetGroundType()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 2f, layerMask);
@@ -486,13 +549,5 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("isCreeping", isCreeping);
         _animator.SetBool("isSlopeSliding", isSlopeSliding);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "AirEnemy")
-        {
-            Debug.Log("Triggered");
-            enemy.SetActive(true);
-            siren1.SetActive(false);
-        }
-    }
+    
 }

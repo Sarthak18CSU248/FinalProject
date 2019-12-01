@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
+    
+    public GameObject timeup,Game_Over;
     public Text uitext;
     public float maintimer;
     private float timer;
@@ -16,7 +18,10 @@ public class Countdown : MonoBehaviour
     {
         timer = maintimer;
     }
-
+    public void GameOver()
+    {
+        Game_Over.SetActive(true);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -31,6 +36,19 @@ public class Countdown : MonoBehaviour
             doOnce = true;
             uitext.text = "0.00";
             timer = 0.0f;
+
+        }
+        if (uitext.text == "0.00")
+        {
+           
+            StartCoroutine(Game_end());
+        }
+        IEnumerator Game_end()
+        {
+            timeup.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            timeup.SetActive(false);
+            GameOver();
 
         }
     }

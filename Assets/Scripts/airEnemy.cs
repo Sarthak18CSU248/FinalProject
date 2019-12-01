@@ -5,7 +5,7 @@ using UnityEngine;
 public class airEnemy : MonoBehaviour
 {
     public GameObject Player,Game_Over;
-    
+    private PlayerController player;
     public bool istriggered=false;
     public enum airenemystate
     {
@@ -42,11 +42,13 @@ public class airEnemy : MonoBehaviour
     private bool _tracking = true;
     public LayerMask lm;
     public float dashAmount;
+    public Vector3 player_coardinates = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        player_coardinates = Player.transform.position;
         if (autoTargetPlayer)
         {
             target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -103,9 +105,10 @@ public class airEnemy : MonoBehaviour
         {
             istriggered = true;
             GameOver();
-            
+
         }
     }
+    
    
     public void MoveTowards(Transform target)
     {

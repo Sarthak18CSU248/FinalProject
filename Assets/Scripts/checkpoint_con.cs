@@ -5,25 +5,25 @@ using UnityEngine;
 public class checkpoint_con : MonoBehaviour
 {
     private PlayerController player;
-    public bool Checkpoint_Reached;
+    public GameObject Player ,checkpoint;
+    public Sprite YellowFlag, GreenFlag;
+    private SpriteRenderer checkpoint_renderer;
+    public bool CheckPoint_reached = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        checkpoint_renderer = checkpoint.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+         if(Vector3.Distance(Player.transform.position, checkpoint.transform.position) <= 1f)
+            {
+                CheckPoint_reached = true;
+                checkpoint_renderer.sprite = GreenFlag;
+            }
         
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(player.isGrounded==true && collision.tag == "Player")
-        {
-            Debug.Log("Hello");
-            Checkpoint_Reached = true;
-
-        }
-    }
+  
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class airEnemy : MonoBehaviour
 {
-    public GameObject Player,Game_Over;
-    private PlayerController player;
+    public GameObject Player,Game_Over,airenemy, checkpoint1, checkpoint2;
+    public PlayerController player;
     public bool istriggered=false;
     public enum airenemystate
     {
@@ -27,6 +27,8 @@ public class airEnemy : MonoBehaviour
     public void GameOver()
     {
         Game_Over.SetActive(true);
+        Player.SetActive(false);
+        airenemy.SetActive(false);
         
 
     }
@@ -43,12 +45,23 @@ public class airEnemy : MonoBehaviour
     public LayerMask lm;
     public float dashAmount;
     public Vector3 player_coardinates = Vector3.zero;
+    public Vector3 airenemy_coardinates = Vector3.zero;
+    public Vector3 checkpoint_coardinates1 = Vector3.zero;
+    public Vector3 checkpoint_coardinates2 = Vector3.zero;
+    public bool check1;
+    public bool check2;
+    public Rigidbody2D air_enemy;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         player_coardinates = Player.transform.position;
+        airenemy_coardinates = airenemy.transform.position;
+        checkpoint_coardinates1 = checkpoint1.transform.position;
+        checkpoint_coardinates2 = checkpoint2.transform.position;
+        air_enemy = airenemy.GetComponent<Rigidbody2D>();
         if (autoTargetPlayer)
         {
             target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -104,12 +117,20 @@ public class airEnemy : MonoBehaviour
         if (Vector3.Distance(Player.transform.position, rb.transform.position) <= 0.1f)
         {
             istriggered = true;
-            GameOver();
-
+        
         }
+        if (istriggered)
+        {
+            
+            
+                GameOver();
+            
+        }
+        
     }
     
-   
+
+
     public void MoveTowards(Transform target)
     {
         Lookat2D(target);
@@ -133,5 +154,14 @@ public class airEnemy : MonoBehaviour
         rb.angularVelocity = 0f;
         _tracking = true;
     }
-   
+    IEnumerator AirEnemyWaiter()
+    {
+        air_enemy.simulated = false;
+        airenemy_coardinates = new Vector3(41.5f, 14.1f, airenemy_coardinates.z);
+        yield return new WaitForSeconds(0.3f);
+        air_enemy.simulated = true;
+
+
+    }
+
 }

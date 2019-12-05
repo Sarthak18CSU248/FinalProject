@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
         ground_enemy.SetActive(true);
         ground_enemy2.SetActive(true);
         ground_enemy3.SetActive(true);
+        airenemy.SetActive(true);
 
     }
     

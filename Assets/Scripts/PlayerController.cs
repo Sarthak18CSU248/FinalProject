@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Prime31;
 using Global;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject player,checkpoint1,checkpoint2,greenflag1,greenflag2,speedcoin,speedcoin1,speedcoin2,speedcoin3;
+    public GameObject platforms,finishbg,congo,finishplatform,game_over,player,checkpoint1,checkpoint2,greenflag1,greenflag2,speedcoin,speedcoin1,speedcoin2,speedcoin3,speedcoin5,freefall_Platform;
+    
+    
     public enum GroundType
     {
         none,
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public bool canGlide = true;
 
 
-    private Vector3 _moveDirection = Vector3.zero;
+    public Vector3 _moveDirection = Vector3.zero;
     private CharacterController2D _characterController;
     private bool _lastJumpWallLeft;
     private float _slopeAngles;
@@ -78,6 +81,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 speedcoin_coardinates2 = Vector3.zero;
     public Vector3 speedcoin_coardinates3 = Vector3.zero;
     public Vector3 speedcoin_coardinates4 = Vector3.zero;
+    public Vector3 speedcoin_coardinates5 = Vector3.zero;
+    public Vector3 freefallplatform_coardinates = Vector3.zero;
+    public Vector3 finishPlatform_coardinates = Vector3.zero;
+
 
     public bool check1, check2; 
 
@@ -95,6 +102,9 @@ public class PlayerController : MonoBehaviour
         speedcoin_coardinates2 = speedcoin1.transform.position;
         speedcoin_coardinates3 = speedcoin2.transform.position;
         speedcoin_coardinates4 = speedcoin3.transform.position;
+        speedcoin_coardinates5 = speedcoin5.transform.position;
+        freefallplatform_coardinates = freefall_Platform.transform.position;
+        finishPlatform_coardinates = finishplatform.transform.position;
     }
 
 
@@ -127,6 +137,15 @@ public class PlayerController : MonoBehaviour
                 checkpoint1.SetActive(false);
                 greenflag1.SetActive(true);
                 check1 = true;
+            }
+            if (System.Math.Abs(player.transform.position.x - finishPlatform_coardinates.x) <= 3.0f)
+            {
+                congo.SetActive(true);
+                finishplatform.SetActive(false);
+                player.SetActive(false);
+                finishbg.SetActive(false);
+                platforms.SetActive(false);
+                
             }
             if (System.Math.Abs(player.transform.position.x - checkpoint_coardinates2.x) <= EPSILON)
             {
@@ -170,6 +189,12 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Walking());
 
             }
+            if (System.Math.Abs(player.transform.position.x - speedcoin_coardinates5.x) <= a)
+            {
+                speedcoin5.SetActive(false);
+                StartCoroutine(Walking());
+
+            }
 
             _currentGlidetimer = Glidetimer;
             _moveDirection.y = 0;
@@ -204,6 +229,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if(System.Math.Abs(player.transform.position.y - freefallplatform_coardinates.y) <= 10f)
+            {
+                game_over.SetActive(true);
+                
+            }
             if (Input.GetButtonUp("Jump"))
             {
                 if (_moveDirection.y > 0)
@@ -420,7 +450,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Walking()
     {
         walkSpeed = (walkSpeed * 1.5f);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         walkSpeed = 6.0f; 
     }
     
